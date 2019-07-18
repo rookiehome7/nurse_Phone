@@ -1,0 +1,24 @@
+PODS:
+  - CocoaAsyncSocket (7.6.3)
+  - CocoaMQTT (1.2.4):
+    - CocoaAsyncSocket (~> 7.6.3)
+  - FilesProvider (0.26.0)
+
+DEPENDENCIES:
+  - CocoaMQTT
+  - FilesProvider
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaAsyncSocket
+    - CocoaMQTT
+    - FilesProvider
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  CocoaMQTT: 56f7a757a65c65bbb4df17c6f06aeea79fb2969c
+  FilesProvider: 2a8ae17d8b9c23a6feadb1308ee638fa31d21065
+
+PODFILE CHECKSUM: 51309e52d9250dd03d7bc69655592f672f1fbeab
+
+COCOAPODS: 1.7.3
