@@ -81,9 +81,11 @@
 		A9FACB151D0A7B3700E3C8A5 /* toy-mono.wav in Resources */ = {isa = PBXBuildFile; fileRef = A9FACB071D0A7B3700E3C8A5 /* toy-mono.wav */; };
 		B97C46309D18C33CE5A1E391 /* Pods_nurseUnit_Device.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FED247A02C6822DB53861C5 /* Pods_nurseUnit_Device.framework */; };
 		E040017222CB21390090D12A /* OutgoingCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E040017122CB21390090D12A /* OutgoingCallViewController.swift */; };
+		E04C288222EC8FFA00EC6567 /* AdvancedSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C288122EC8FFA00EC6567 /* AdvancedSettingViewController.swift */; };
+		E04C288522EC912200EC6567 /* VolumeControlClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C288322EC912200EC6567 /* VolumeControlClass.swift */; };
+		E04C288622EC912200EC6567 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04C288422EC912200EC6567 /* SoundManager.swift */; };
 		E08F917922CB05A1007506F3 /* ApplicationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08F917822CB05A1007506F3 /* ApplicationStatus.swift */; };
 		E08F917B22CB07DD007506F3 /* LocalUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08F917A22CB07DD007506F3 /* LocalUserData.swift */; };
-		E08F917D22CB08BA007506F3 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08F917C22CB08BA007506F3 /* SettingViewController.swift */; };
 		E08F917F22CB0B72007506F3 /* LinphoneUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08F917E22CB0B72007506F3 /* LinphoneUtil.swift */; };
 		E08F918122CB0CA2007506F3 /* ReceiveCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */; };
 		F42E3A6E22C4739800DAA1CC /* LinphoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E3A6D22C4739800DAA1CC /* LinphoneManager.swift */; };
@@ -100,7 +102,7 @@
 		A924DECE1D07D4EA0030A438 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A99663611D06F877003B5EEE /* nurseUnit_Device.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nurseUnit_Device.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A99663641D06F877003B5EEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = nurse_Phone/AppDelegate.swift; sourceTree = "<group>"; };
-		A99663661D06F877003B5EEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = nurse_Phone/ViewController.swift; sourceTree = "<group>"; };
+		A99663661D06F877003B5EEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = nurse_Phone/Controller/ViewController.swift; sourceTree = "<group>"; };
 		A99663691D06F877003B5EEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A996636B1D06F877003B5EEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A996636E1D06F877003B5EEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -194,12 +196,14 @@
 		A9FACB061D0A7B3700E3C8A5 /* soft_as_snow.mkv */ = {isa = PBXFileReference; lastKnownFileType = file; path = soft_as_snow.mkv; sourceTree = "<group>"; };
 		A9FACB071D0A7B3700E3C8A5 /* toy-mono.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "toy-mono.wav"; sourceTree = "<group>"; };
 		DAD26BDD892CB6E1BF8C6689 /* Pods-nurseUnit_Device.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nurseUnit_Device.debug.xcconfig"; path = "Target Support Files/Pods-nurseUnit_Device/Pods-nurseUnit_Device.debug.xcconfig"; sourceTree = "<group>"; };
-		E040017122CB21390090D12A /* OutgoingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OutgoingCallViewController.swift; path = nurse_Phone/OutgoingCallViewController.swift; sourceTree = "<group>"; };
+		E040017122CB21390090D12A /* OutgoingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OutgoingCallViewController.swift; path = nurse_Phone/Controller/OutgoingCallViewController.swift; sourceTree = "<group>"; };
+		E04C288122EC8FFA00EC6567 /* AdvancedSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvancedSettingViewController.swift; path = nurse_Phone/Controller/AdvancedSettingViewController.swift; sourceTree = "<group>"; };
+		E04C288322EC912200EC6567 /* VolumeControlClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeControlClass.swift; sourceTree = "<group>"; };
+		E04C288422EC912200EC6567 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		E08F917822CB05A1007506F3 /* ApplicationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStatus.swift; sourceTree = "<group>"; };
 		E08F917A22CB07DD007506F3 /* LocalUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserData.swift; sourceTree = "<group>"; };
-		E08F917C22CB08BA007506F3 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = nurse_Phone/SettingViewController.swift; sourceTree = "<group>"; };
-		E08F917E22CB0B72007506F3 /* LinphoneUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LinphoneUtil.swift; path = nurse_Phone/LinphoneUtil.swift; sourceTree = "<group>"; };
-		E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReceiveCallViewController.swift; path = nurse_Phone/ReceiveCallViewController.swift; sourceTree = "<group>"; };
+		E08F917E22CB0B72007506F3 /* LinphoneUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinphoneUtil.swift; sourceTree = "<group>"; };
+		E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReceiveCallViewController.swift; path = nurse_Phone/Controller/ReceiveCallViewController.swift; sourceTree = "<group>"; };
 		F42E3A6D22C4739800DAA1CC /* LinphoneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinphoneManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -397,12 +401,10 @@
 			isa = PBXGroup;
 			children = (
 				A99663641D06F877003B5EEE /* AppDelegate.swift */,
-				F42E3A6D22C4739800DAA1CC /* LinphoneManager.swift */,
-				E08F917E22CB0B72007506F3 /* LinphoneUtil.swift */,
 				A99663661D06F877003B5EEE /* ViewController.swift */,
 				E040017122CB21390090D12A /* OutgoingCallViewController.swift */,
 				E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */,
-				E08F917C22CB08BA007506F3 /* SettingViewController.swift */,
+				E04C288122EC8FFA00EC6567 /* AdvancedSettingViewController.swift */,
 			);
 			name = Controller;
 			path = ..;
@@ -500,6 +502,10 @@
 			children = (
 				E08F917822CB05A1007506F3 /* ApplicationStatus.swift */,
 				E08F917A22CB07DD007506F3 /* LocalUserData.swift */,
+				E08F917E22CB0B72007506F3 /* LinphoneUtil.swift */,
+				F42E3A6D22C4739800DAA1CC /* LinphoneManager.swift */,
+				E04C288422EC912200EC6567 /* SoundManager.swift */,
+				E04C288322EC912200EC6567 /* VolumeControlClass.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -654,13 +660,15 @@
 			files = (
 				E08F917F22CB0B72007506F3 /* LinphoneUtil.swift in Sources */,
 				F42E3A7322C4747400DAA1CC /* ViewController.swift in Sources */,
+				E04C288522EC912200EC6567 /* VolumeControlClass.swift in Sources */,
 				E040017222CB21390090D12A /* OutgoingCallViewController.swift in Sources */,
+				E04C288622EC912200EC6567 /* SoundManager.swift in Sources */,
 				F42E3A7222C4746E00DAA1CC /* AppDelegate.swift in Sources */,
+				E04C288222EC8FFA00EC6567 /* AdvancedSettingViewController.swift in Sources */,
 				E08F918122CB0CA2007506F3 /* ReceiveCallViewController.swift in Sources */,
 				E08F917B22CB07DD007506F3 /* LocalUserData.swift in Sources */,
 				F42E3A6E22C4739800DAA1CC /* LinphoneManager.swift in Sources */,
 				E08F917922CB05A1007506F3 /* ApplicationStatus.swift in Sources */,
-				E08F917D22CB08BA007506F3 /* SettingViewController.swift in Sources */,
 				A924DECF1D07D4EA0030A438 /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

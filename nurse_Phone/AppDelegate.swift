@@ -15,30 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //var linphoneManager: LinphoneManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Set Navigation bar color
-        let navigationBarAppearace = UINavigationBar.appearance()
-        // Label Color
-        navigationBarAppearace.tintColor = uicolorFromHex(rgbValue: 0xffffff)
-        // Background Color
-        navigationBarAppearace.barTintColor = uicolorFromHex(rgbValue: 0x4f4f4f)
-        // Change navigation item title color
-        navigationBarAppearace.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
 
-        //self.linphoneManager = LinphoneManager()
-        
         theLinphone.manager = LinphoneManager()
         theLinphone.manager?.startLinphone()
-
         return true
     }
     
-    func uicolorFromHex(rgbValue:UInt32)->UIColor{
-        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-        let blue = CGFloat(rgbValue & 0xFF)/256.0
-        
-        return UIColor(red:red, green:green, blue:blue, alpha:1.0)
-    }
+
 
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -177,7 +177,6 @@ class LinphoneManager {
             return nil
         }
         
-//        let info = linphone_auth_info_new(linphone_address_get_username(from), nil, password, nil, nil, nil);
         let info = linphone_auth_info_new(linphone_address_get_username(from), account, password, nil, nil, identity);
         /*create authentication structure from identity*/
         linphone_core_add_auth_info(theLinphone.lc!, info); /*add authentication info to LinphoneCore*/
