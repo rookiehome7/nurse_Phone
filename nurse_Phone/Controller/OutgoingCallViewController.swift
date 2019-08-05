@@ -78,15 +78,16 @@ class OutgoingCallViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var sipImage: UIImageView!
+    @IBOutlet weak var proximityLabel: UILabel!
     
     // User Data
     let accountData = LocalUserData() // Get function read file from PLIST
     // iBeacon Searching
     var locationManager: CLLocationManager!
-    // iBeacon Broadcast
-    var broadcastBeacon: CLBeaconRegion!
-    var beaconPeripheralData: NSDictionary!
-    var peripheralManager: CBPeripheralManager!
+//    // iBeacon Broadcast
+//    var broadcastBeacon: CLBeaconRegion!
+//    var beaconPeripheralData: NSDictionary!
+//    var peripheralManager: CBPeripheralManager!
     
 
     override func viewDidLoad() {
@@ -111,6 +112,9 @@ class OutgoingCallViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
         
+        
+
+        
         let lc = theLinphone.lc
         linphone_core_invite(lc, OutgoingCallViewData.phoneNumber)
     }
@@ -119,9 +123,8 @@ class OutgoingCallViewController: UIViewController {
         // Add CallStateChange listener
         OutgoingCallVT.lct.call_state_changed = outgoingCallStateChanged
         linphone_core_add_listener(theLinphone.lc!,  &OutgoingCallVT.lct)
-        
-        // Start Service : iBeacon Searching & Broadcast
         startSearchingBeacon()
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -129,7 +132,7 @@ class OutgoingCallViewController: UIViewController {
         linphone_core_remove_listener(theLinphone.lc!, &OutgoingCallVT.lct)
         
         // Start Service : iBeacon Searching & Broadcast
-        startSearchingBeacon()
+        stopSearchingBeacon()
 
         // Terminate Call First If it still have call
         terminateCall()
@@ -162,6 +165,7 @@ extension OutgoingCallViewController: CLLocationManagerDelegate {
             startMonitoring(beaconRegion: beaconRegion)
             startRanging(beaconRegion: beaconRegion)
         }
+        
     }
     func stopSearchingBeacon() {
         if let uuid = NSUUID(uuidString: accountData.getBeaconUUID()!) {
@@ -212,21 +216,21 @@ extension OutgoingCallViewController: CLLocationManagerDelegate {
                 
             }
             print("BEACON RANGED: uuid: \(beacon.proximityUUID.uuidString) major: \(beacon.major)  minor: \(beacon.minor) proximity: \(beaconProximity)")
-            //proximityLabel.text = beaconProximity
+            proximityLabel.text = beaconProximity
             
             // Example how to set the volume
-            if (beaconProximity == "Immediate"){
-                let vc = VolumeControl.sharedInstance
-                vc.setVolume(volume: 0.1)
-            }
-            if (beaconProximity == "Near"){
-                let vc = VolumeControl.sharedInstance
-                vc.setVolume(volume: 0.50)
-            }
-            if (beaconProximity == "Far"){
-                let vc = VolumeControl.sharedInstance
-                vc.setVolume(volume: 1.0)
-            }
+//            if (beaconProximity == "Immediate"){
+//                let vc = VolumeControl.sharedInstance
+//                vc.setVolume(volume: 0.1)
+//            }
+//            if (beaconProximity == "Near"){
+//                let vc = VolumeControl.sharedInstance
+//                vc.setVolume(volume: 0.50)
+//            }
+//            if (beaconProximity == "Far"){
+//                let vc = VolumeControl.sharedInstance
+//                vc.setVolume(volume: 1.0)
+//            }
         }
     }
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {

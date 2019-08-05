@@ -16,27 +16,27 @@ let registrationStateChanged: LinphoneCoreRegistrationStateChangedCb  = {
     (lc: Optional<OpaquePointer>, proxyConfig: Optional<OpaquePointer>, state: _LinphoneRegistrationState, message: Optional<UnsafePointer<Int8>>) in
     switch state{
     case LinphoneRegistrationNone: /**<Initial state for registrations */
-        NSLog("LinphoneRegistrationNone")
+        print("LinphoneRegistrationNone")
         sipRegistrationStatus = .unknown
         
     case LinphoneRegistrationProgress:
-        NSLog("LinphoneRegistrationProgress")
+        print("LinphoneRegistrationProgress")
         sipRegistrationStatus = .progress
         
     case LinphoneRegistrationOk:
-        NSLog("LinphoneRegistrationOk")
+        print("LinphoneRegistrationOk")
         sipRegistrationStatus = .ok
         
     case LinphoneRegistrationCleared:
-        NSLog("LinphoneRegistrationCleared")
+        print("LinphoneRegistrationCleared")
         sipRegistrationStatus = .unregister
         
     case LinphoneRegistrationFailed:
-        NSLog("LinphoneRegistrationFailed")
+        print("LinphoneRegistrationFailed")
         sipRegistrationStatus = .fail
         
     default:
-        NSLog("Unkown registration state")
+        print("Unkown registration state")
         sipRegistrationStatus = .unknown
     }
 } as LinphoneCoreRegistrationStateChangedCb
@@ -49,14 +49,15 @@ let callStateChanged: LinphoneCoreCallStateChangedCb = {
     case LinphoneCallIncomingReceived: /**<This is a new incoming call */
         NSLog("callStateChanged: LinphoneCallIncomingReceived")
         // Run ReceiveCallViewController to handle Incoming call
-        if var controller = UIApplication.shared.keyWindow?.rootViewController{
-            while let presentedViewController = controller.presentedViewController {
-                controller = presentedViewController
-            }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ReceiveCallViewController")
-            controller.present(vc, animated: true, completion: nil)
-        }
+//        if var controller = UIApplication.shared.keyWindow?.rootViewController{
+//            while let presentedViewController = controller.presentedViewController {
+//                controller = presentedViewController
+//            }
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "ReceiveCallViewController")
+//            controller.present(vc, animated: true, completion: nil)
+//        }
+        
     case LinphoneCallStreamsRunning: /**<The media streams are established and running*/
         NSLog("callStateChanged: LinphoneCallStreamsRunning")
         
@@ -107,11 +108,17 @@ class LinphoneManager {
     // Set callback function for Register & Call State Change
     // Set Ringtone Sound
      func initLinphone(){
+        // Documentation : Configure file
+        // https://www.linphone.org/docs/liblinphone/group__misc.html
+        // Documentation: Set Volume Speaker Microphone
+        // https://www.linphone.org/docs/liblinphone/group__call__misc.html
+        
         // Enable debug log to stdout
         linphone_core_set_log_file(nil)
-        linphone_core_set_log_level(ORTP_DEBUG)
+        //linphone_core_set_log_level(ORTP_DEBUG)
+        
         // Load config
-        let configFilename = documentFile("linphonerc222")
+        let configFilename = documentFile("linphonerc")
         let factoryConfigFilename = bundleFile("linphonerc-factory")
 
         let configFilenamePtr: UnsafePointer<Int8> = configFilename.cString(using: String.Encoding.utf8.rawValue)!
