@@ -150,10 +150,8 @@ class ViewController: UIViewController, FileProviderDelegate {
         //makeCallMqtt()
         hideTaskUI()
         //testComplete()
-        
-        
-        
     }
+    
     @IBAction func rejectButton(_ sender: Any) {
         //mqtt?.publish("wearable/" + accountData.getSipUsername()!, withString: string )
         hideTaskUI()

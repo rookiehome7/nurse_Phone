@@ -10,7 +10,7 @@ import MediaPlayer
 import AVFoundation
 import CoreLocation
 import CoreBluetooth
-import AudioToolbox
+import FilesProvider
 
 struct MainViewData{
     static var controller: MainViewController?
@@ -54,14 +54,12 @@ var mainViewCallStateChanged: LinphoneCoreCallStateChangedCb = {
         NSLog("mainViewCallStateChanged: LinphoneCallError")
         MainViewData.controller?.callStatusLabel.text = "Error"
         MainViewData.controller?.terminateCall()
-        MainViewData.controller?.callMode_NotActive()
         MainViewData.controller?.stopSearchingBeacon()
         
     case LinphoneCallEnd:
         NSLog("mainViewCallStateChanged: LinphoneCallEnd")
         MainViewData.controller?.callStatusLabel.text = "End"
         MainViewData.controller?.terminateCall()
-        MainViewData.controller?.callMode_NotActive()
         MainViewData.controller?.stopSearchingBeacon()
         
         
@@ -69,7 +67,6 @@ var mainViewCallStateChanged: LinphoneCoreCallStateChangedCb = {
         NSLog("mainViewCallStateChanged: LinphoneCallReleased")
         MainViewData.controller?.callStatusLabel.text = "Released"
         MainViewData.controller?.terminateCall()
-        MainViewData.controller?.callMode_NotActive()
         MainViewData.controller?.stopSearchingBeacon()
         
     default:
@@ -134,6 +131,17 @@ class MainViewController: UIViewController {
     
     //let vc = VolumeControl.sharedInstance
     
+    
+    // Create File Provider
+    let documentsProvider = LocalFileProvider()
+    var ftpFileProvider : FTPFileProvider?
+    // FTP Setting
+    let server: URL = URL(string: "ftp://192.168.1.10")!
+    let username = "admin"
+    let password = ""
+    
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         MainViewData.controller = self
@@ -148,8 +156,17 @@ class MainViewController: UIViewController {
         
         startBroadcastBeacon()
         
-        callMode_NotActive()
+        // FTP & Local File Setup
+        ftpFileProvider?.delegate = self as FileProviderDelegate
+        documentsProvider.delegate = self as FileProviderDelegate
+        let credential = URLCredential(user: username, password: password, persistence: .permanent)
+        ftpFileProvider = FTPFileProvider(baseURL: server, passive: true, credential: credential)
+        //ftpFileProvider = FTPFileProvider(baseURL: server, passive: true, credential: credential, cache: nil)
+        
+        
+       
         // UPDATE UI every 2 second
+         callMode_NotActive()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.updateUI()
         }
@@ -293,6 +310,70 @@ class MainViewController: UIViewController {
     
 }
 
+
+extension MainViewController: FileProviderDelegate {
+    
+    // Download Record file from FTP Server
+    func downloadFTPFile(){
+        // Remove file it first
+        documentsProvider.removeItem(path: "playback.m4a", completionHandler: nil)
+        let localFileURL = getDocumentsDirectory().appendingPathComponent("playback.m4a")
+        ftpFileProvider?.copyItem(path: "/recording.m4a", toLocalURL: localFileURL, completionHandler: nil)
+    }
+    
+    // Send Record file to FTP Server
+    func uploadRecordFile(){
+        let fileURL = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        ftpFileProvider?.copyItem(localFile: fileURL, to: "/recording.m4a", overwrite: true, completionHandler: nil)
+    }
+    
+    // FileProvider Function
+    func fileproviderSucceed(_ fileProvider: FileProviderOperations, operation: FileOperationType) {
+        switch operation {
+        case .copy(source: let source, destination: let dest):
+            print("\(source) copied to \(dest).")
+        case .remove(path: let path):
+            print("\(path) has been deleted.")
+        default:
+            if let destination = operation.destination {
+                print("\(operation.actionDescription) from \(operation.source) to \(destination) succeed.")
+            } else {
+                print("\(operation.actionDescription) on \(operation.source) succeed.")
+            }
+        }
+    }
+    
+    func fileproviderFailed(_ fileProvider: FileProviderOperations, operation: FileOperationType, error: Error) {
+        switch operation {
+        case .copy(source: let source, destination: let dest):
+            print("copying \(source) to \(dest) has been failed.")
+        case .remove:
+            print("file can't be deleted.")
+        default:
+            if let destination = operation.destination {
+                print("\(operation.actionDescription) from \(operation.source) to \(destination) failed.")
+            } else {
+                print("\(operation.actionDescription) on \(operation.source) failed.")
+            }
+        }
+    }
+    
+    func fileproviderProgress(_ fileProvider: FileProviderOperations, operation: FileOperationType, progress: Float) {
+        switch operation {
+        case .copy(source: let source, destination: let dest) where dest.hasPrefix("file://"):
+            print("Downloading \(source) to \((dest as NSString).lastPathComponent): \(progress * 100) completed.")
+        case .copy(source: let source, destination: let dest) where source.hasPrefix("file://"):
+            print("Uploading \((source as NSString).lastPathComponent) to \(dest): \(progress * 100) completed.")
+        case .copy(source: let source, destination: let dest):
+            print("Copy \(source) to \(dest): \(progress * 100) completed.")
+        default:
+            break
+        }
+    }
+    
+}
+
+
 // MARK : Linphone Extension
 extension MainViewController {
     func makeCall(phoneNumber : String){
@@ -313,6 +394,7 @@ extension MainViewController {
             let result = linphone_core_terminate_call(theLinphone.lc!, call)
             NSLog("Terminated call result(receive): \(result)")
         }
+        callMode_NotActive()
     }
 }
 
