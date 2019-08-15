@@ -102,7 +102,7 @@
 		A924DECE1D07D4EA0030A438 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A99663611D06F877003B5EEE /* nurseUnit_Device.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nurseUnit_Device.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A99663641D06F877003B5EEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = nurse_Phone/AppDelegate.swift; sourceTree = "<group>"; };
-		A99663661D06F877003B5EEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = nurse_Phone/Controller/ViewController.swift; sourceTree = "<group>"; };
+		A99663661D06F877003B5EEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A99663691D06F877003B5EEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A996636B1D06F877003B5EEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A996636E1D06F877003B5EEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -196,12 +196,12 @@
 		A9FACB061D0A7B3700E3C8A5 /* soft_as_snow.mkv */ = {isa = PBXFileReference; lastKnownFileType = file; path = soft_as_snow.mkv; sourceTree = "<group>"; };
 		A9FACB071D0A7B3700E3C8A5 /* toy-mono.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "toy-mono.wav"; sourceTree = "<group>"; };
 		DAD26BDD892CB6E1BF8C6689 /* Pods-nurseUnit_Device.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nurseUnit_Device.debug.xcconfig"; path = "Target Support Files/Pods-nurseUnit_Device/Pods-nurseUnit_Device.debug.xcconfig"; sourceTree = "<group>"; };
-		E040017122CB21390090D12A /* OutgoingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OutgoingCallViewController.swift; path = nurse_Phone/Controller/OutgoingCallViewController.swift; sourceTree = "<group>"; };
+		E040017122CB21390090D12A /* OutgoingCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingCallViewController.swift; sourceTree = "<group>"; };
 		E04C288122EC8FFA00EC6567 /* AdvancedSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdvancedSettingViewController.swift; path = nurse_Phone/Controller/AdvancedSettingViewController.swift; sourceTree = "<group>"; };
 		E04C288322EC912200EC6567 /* VolumeControlClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeControlClass.swift; sourceTree = "<group>"; };
 		E04C288422EC912200EC6567 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		E08F917A22CB07DD007506F3 /* LocalUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserData.swift; sourceTree = "<group>"; };
-		E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReceiveCallViewController.swift; path = nurse_Phone/Controller/ReceiveCallViewController.swift; sourceTree = "<group>"; };
+		E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCallViewController.swift; sourceTree = "<group>"; };
 		E0BD3C2E22F73CB500F3D8C9 /* MQTTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTManager.swift; sourceTree = "<group>"; };
 		E0BD3C3022F73CE600F3D8C9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = nurse_Phone/Controller/MainViewController.swift; sourceTree = "<group>"; };
 		F42E3A6D22C4739800DAA1CC /* LinphoneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinphoneManager.swift; sourceTree = "<group>"; };
@@ -402,10 +402,8 @@
 			children = (
 				A99663641D06F877003B5EEE /* AppDelegate.swift */,
 				E0BD3C3022F73CE600F3D8C9 /* MainViewController.swift */,
-				A99663661D06F877003B5EEE /* ViewController.swift */,
-				E040017122CB21390090D12A /* OutgoingCallViewController.swift */,
-				E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */,
 				E04C288122EC8FFA00EC6567 /* AdvancedSettingViewController.swift */,
+				E09E53F822FAAED200B712A0 /* Notuse */,
 			);
 			name = Controller;
 			path = ..;
@@ -503,11 +501,21 @@
 			children = (
 				E08F917A22CB07DD007506F3 /* LocalUserData.swift */,
 				F42E3A6D22C4739800DAA1CC /* LinphoneManager.swift */,
-				E0BD3C2E22F73CB500F3D8C9 /* MQTTManager.swift */,
 				E04C288422EC912200EC6567 /* SoundManager.swift */,
+				E0BD3C2E22F73CB500F3D8C9 /* MQTTManager.swift */,
 				E04C288322EC912200EC6567 /* VolumeControlClass.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E09E53F822FAAED200B712A0 /* Notuse */ = {
+			isa = PBXGroup;
+			children = (
+				A99663661D06F877003B5EEE /* ViewController.swift */,
+				E040017122CB21390090D12A /* OutgoingCallViewController.swift */,
+				E08F918022CB0CA2007506F3 /* ReceiveCallViewController.swift */,
+			);
+			path = Notuse;
 			sourceTree = "<group>";
 		};
 		ED356AC35F135F63C3EF11F9 /* Frameworks */ = {

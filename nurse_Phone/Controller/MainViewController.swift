@@ -163,7 +163,7 @@ class MainViewController: UIViewController {
         ftpFileProvider = FTPFileProvider(baseURL: server, passive: true, credential: credential)
         //ftpFileProvider = FTPFileProvider(baseURL: server, passive: true, credential: credential, cache: nil)
         
-        
+
        
         // UPDATE UI every 2 second
          callMode_NotActive()
@@ -244,11 +244,15 @@ class MainViewController: UIViewController {
         
         mqttSubscribeTopicLabel.text = accountData.getMQTTTopic()! + "/" + accountData.getSipUsername()!
         mqttStatusLabel.text = "Connected to " + accountData.getMQTTServerIp()!
+        
+
+        theMQTT.manager?.login_PublishMessage(nurseID: accountData.getSipUsername()!, deviceName: "NurseName")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         //Remove Call Status Listener
         linphone_core_remove_listener(theLinphone.lc!, &MainViewVT.lct)
+        theMQTT.manager?.logout_PublishMessage(nurseID: accountData.getSipUsername()!, deviceName: "NurseName")
     }
     
     
@@ -281,6 +285,7 @@ class MainViewController: UIViewController {
         theMQTT.manager?.acceptTask_PublishMessage(priorityTask: priorityTask, taskID: taskID, bedID: bedsidePhoneNumber, nurseID: accountData.getSipUsername()!)
         // Set UI
         taskAccept_Hide()
+        
         // Make Call
         makeCall(phoneNumber: bedsidePhoneNumber)
     }
@@ -307,8 +312,32 @@ class MainViewController: UIViewController {
             finishPlayback()
         }
     }
-    
 }
+
+// MARK : Linphone Extension
+extension MainViewController {
+    func makeCall(phoneNumber : String){
+        // MAKE Phone call
+        let lc = theLinphone.lc
+        linphone_core_invite(lc, phoneNumber)
+    }
+    func answerCall(){
+        let call = linphone_core_get_current_call(theLinphone.lc!)
+        if call != nil {
+            let result = linphone_core_accept_call(theLinphone.lc!, call)
+            NSLog("Answer call result(receive): \(result)")
+        }
+    }
+    func terminateCall(){
+        let call = linphone_core_get_current_call(theLinphone.lc!)
+        if call != nil {
+            let result = linphone_core_terminate_call(theLinphone.lc!, call)
+            NSLog("Terminated call result(receive): \(result)")
+        }
+        callMode_NotActive()
+    }
+}
+
 
 
 extension MainViewController: FileProviderDelegate {
@@ -374,29 +403,6 @@ extension MainViewController: FileProviderDelegate {
 }
 
 
-// MARK : Linphone Extension
-extension MainViewController {
-    func makeCall(phoneNumber : String){
-        // MAKE Phone call
-        let lc = theLinphone.lc
-        linphone_core_invite(lc, phoneNumber)
-    }
-    func answerCall(){
-        let call = linphone_core_get_current_call(theLinphone.lc!)
-        if call != nil {
-            let result = linphone_core_accept_call(theLinphone.lc!, call)
-            NSLog("Answer call result(receive): \(result)")
-        }
-    }
-    func terminateCall(){
-        let call = linphone_core_get_current_call(theLinphone.lc!)
-        if call != nil {
-            let result = linphone_core_terminate_call(theLinphone.lc!, call)
-            NSLog("Terminated call result(receive): \(result)")
-        }
-        callMode_NotActive()
-    }
-}
 
 
 // MARK : Sound Extension

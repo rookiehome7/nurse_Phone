@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     //var linphoneManager: LinphoneManager?
+    let accountData = LocalUserData()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         theMQTT.manager = MQTTManager()
         theMQTT.manager?.startMQTT()
+
         return true
     }
     
@@ -49,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         linphone_core_terminate_all_calls(theLinphone.lc!);
         theLinphone.manager?.unregister()
+        theMQTT.manager?.logout_PublishMessage(nurseID: accountData.getSipUsername()!, deviceName: "NurseName")
     }
 
 
