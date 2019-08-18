@@ -246,13 +246,13 @@ class MainViewController: UIViewController {
         mqttStatusLabel.text = "Connected to " + accountData.getMQTTServerIp()!
         
 
-        theMQTT.manager?.login_PublishMessage(nurseID: accountData.getSipUsername()!, deviceName: "NurseName")
+        theMQTT.manager?.login_PublishMessage(nurseID: accountData.getSipUsername()!, deviceName: "Nurse: " + accountData.getSipUsername()!)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         //Remove Call Status Listener
         linphone_core_remove_listener(theLinphone.lc!, &MainViewVT.lct)
-        theMQTT.manager?.logout_PublishMessage(nurseID: accountData.getSipUsername()!, deviceName: "NurseName")
+        theMQTT.manager?.logout_PublishMessage(nurseID: accountData.getSipUsername()!, deviceName: "Nurse: " + accountData.getSipUsername()!)
     }
     
     

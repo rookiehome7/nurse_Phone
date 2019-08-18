@@ -42,27 +42,27 @@ class MQTTManager : CocoaMQTTDelegate {
     
     // MARK : MQTT Publish message Function
     func acceptTask_PublishMessage(priorityTask : String ,taskID : String, bedID : String, nurseID : String){
-        let string = priorityTask + "_risk_task_accept" + " " + taskID + " " + bedID + " " + nurseID
+        let string = priorityTask + "_risk_task_accept" + " " + taskID + " " + bedID
         mqtt?.publish("WEARABLE/" + nurseID , withString: string )
     }
     
     func rejectTask_PublishMessage(priorityTask : String ,taskID : String, bedID : String, nurseID : String){
-        let string = priorityTask + "_risk_task_reject" + " " + taskID + " " + bedID + " " + nurseID
+        let string = priorityTask + "_risk_task_reject" + " " + taskID + " " + bedID
         mqtt?.publish("WEARABLE/" + nurseID , withString: string )
     }
     
     func finishTask_PublishMessage(priorityTask : String ,taskID : String, bedID : String, nurseID : String, patient_intention: String){
-        let string = "task_complete" + " " + taskID + " " + bedID + " " + nurseID + " " + patient_intention
+        let string = "task_complete" + " " + taskID + " " + bedID + " " + patient_intention
         mqtt?.publish("WEARABLE/" + nurseID, withString: string )
     }
     
     func login_PublishMessage(nurseID : String, deviceName : String){
-        let string = "log_in" + " " + nurseID + " " + deviceName
+        let string = "log_in" + " " + deviceName
         mqtt?.publish("WEARABLE/" + nurseID , withString: string )
     }
     
     func logout_PublishMessage(nurseID : String, deviceName : String){
-        let string = "log_out" + " " + nurseID + " " + deviceName
+        let string = "log_out" + " " + deviceName
         mqtt?.publish("WEARABLE/" + nurseID , withString: string )
     }
         
